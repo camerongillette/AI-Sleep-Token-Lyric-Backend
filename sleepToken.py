@@ -144,7 +144,7 @@ def generate_lyrics(band_name: str, topic: str) -> str:
 
 # ----- API ENDPOINTS -----
 
-@app.get("/sleeptoken")
+@app.get("/lyricgenerator/sleeptoken")
 @limiter.limit("5/minute")
 def generate_lyrics_endpoint(request: Request, topicId: int):
     try:

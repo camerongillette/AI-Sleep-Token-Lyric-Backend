@@ -89,12 +89,13 @@ choruses = [
 examples = "\n\n".join([f"Chorus {i+1}: {chorus}" for i, chorus in enumerate(choruses)])
 
 #- --- CORS VARIABLES ----
-frontend_url = os.getenv('FRONTEND_URL', 'MISSING FRONTEND_URL ENV VAR')
-print(f"Frontend URL: {frontend_url}")
+frontend_urls = os.getenv('FRONTEND_URLS', 'MISSING FRONTEND_URLS ENV VAR')
+print(f"Frontend URL: {frontend_urls}")
+frontend_urls = [url.strip() for url in frontend_urls.split(',') if url.strip()]
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[frontend_url],  # Allow frontend origin
+    allow_origins=frontend_urls,  # Allow frontend origin
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

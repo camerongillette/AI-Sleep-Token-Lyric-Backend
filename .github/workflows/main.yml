@@ -12,7 +12,7 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
 
-    - name: Git pull
+    - name: Git pull and start python server
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_HOST }}
@@ -21,3 +21,4 @@ jobs:
         script: |
           cd /home/ubuntu/AI-Sleep-Token-Lyric-Backend
           git pull origin main
+          python -m uvicorn sleepToken:app --host 0.0.0.0 --port 8000 --reload &
